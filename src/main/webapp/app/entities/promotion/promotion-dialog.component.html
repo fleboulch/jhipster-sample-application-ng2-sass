@@ -1,0 +1,49 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPromotionLabel">Create or edit a Promotion</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!promotion.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="promotion.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_annee">Annee</label>
+            <div class="d-flex">
+                <input id="field_annee" type="datetime-local" class="form-control" name="annee" [(ngModel)]="promotion.annee"
+                required  />
+            </div>
+            <div [hidden]="!(editForm.controls.annee?.dirty && editForm.controls.annee?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.annee?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.annee?.errors?.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_filiere">Filiere</label>
+            <select class="form-control" id="field_filiere" name="filiere" [(ngModel)]="promotion.filiereId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="filiereOption.id" *ngFor="let filiereOption of filieres; trackBy: trackFiliereById">{{filiereOption.niveau}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

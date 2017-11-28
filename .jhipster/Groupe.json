@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "entreprise",
+            "otherEntityName": "entreprise",
+            "otherEntityRelationshipName": "groupe"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20171128210436",
+    "entityTableName": "groupe",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

@@ -1,0 +1,123 @@
+// a compléter avec infos ENT
+entity ConventionStage {
+	sujet String,
+    fonctions String,
+    competences String,
+	dateDebut ZonedDateTime,
+    dateFin ZonedDateTime
+}
+
+entity Tuteur {
+	nom String,
+    prenom String,
+    telephone String,
+    mail String
+}
+
+entity Professionnel {
+    nom String,
+    prenom String,
+    telephone String,
+    mail String,
+    fonction String,
+    ancienEtudiant Boolean,
+    dateCreation Long,
+    dateModification Long
+}
+
+entity Etudiant {
+	nom String,
+    prenom String,
+    mail String,
+    sexe Sexe,
+    numEtudiant String required
+}
+
+enum Sexe {
+	HOMME, FEMME
+}
+
+entity Entreprise {
+	nom String,
+	pays String,
+    numSiret String required,
+    numSiren String required,
+    telephone String,
+    dateCreation Long,
+    dateModification Long
+}
+
+entity Groupe {
+	nom String,
+    dateCreation Long,
+    dateModification Long
+}
+
+entity Site {
+	adresse String,
+    codePostal String,
+	ville String,
+    pays String,
+    telephone String,
+    dateCreation Long,
+    dateModification Long
+}
+
+entity Diplome {
+	nom String required,
+    dateCreation Long,
+    dateModification Long
+}
+
+entity Partenariat {
+	dateDebut ZonedDateTime,
+    dateFin ZonedDateTime
+}
+
+entity Filiere {
+	niveau String required
+}
+
+entity Promotion {
+	annee ZonedDateTime required
+}
+
+entity Taxe {
+	montant Double,
+    annee ZonedDateTime
+}
+
+relationship OneToOne {
+	Site{entrepriseSiege} to Entreprise{siege(adresse)},
+    Professionnel{entrepriseContact} to Entreprise{contact(nom)}
+}
+
+relationship ManyToMany {
+	Partenariat{diplome(nom)} to Diplome{partenariat},
+    Etudiant{promotion(annee)} to Promotion{etudiant(nom)},
+    Professionnel{diplome(nom)} to Diplome{intervenant(nom)}
+}
+
+relationship OneToMany {
+	Diplome{filiere} to Filiere{diplome(nom)},
+	Filiere{promotion} to Promotion{Filiere(niveau)},
+    Etudiant{conventionStage} to ConventionStage{Etudiant(nom)},
+    Site{conventionStage} to ConventionStage{lieuStage(adresse)},
+    Entreprise{partenariat} to Partenariat{entreprise(nom)},
+    Entreprise{site} to Site{entrepriseSite(nom)},
+    Entreprise{personnel} to Professionnel{entreprisePersonnel(nom)},
+    Entreprise{taxe} to Taxe{entreprise(nom)},
+    Groupe{entreprise} to Entreprise{groupe(nom)},
+    Tuteur{conventionStage} to ConventionStage{tuteur(nom)},
+    Professionnel{conventionStage} to ConventionStage{maitreStage(nom)}
+}
+
+// Set pagination options
+paginate ConventionStage, Etudiant, Entreprise, Diplome, Professionnel, Tuteur, Site, Partenariat, Filiere, Promotion, Groupe, Taxe with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+//angularSuffix * with mySuffix

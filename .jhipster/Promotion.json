@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "filiere",
+            "otherEntityName": "filiere",
+            "otherEntityField": "niveau"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "etudiant",
+            "otherEntityName": "etudiant",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "promotion"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "annee",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20171128210441",
+    "entityTableName": "promotion",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}
