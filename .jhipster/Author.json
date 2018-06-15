@@ -1,0 +1,16 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "birthDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180615211404",
+    "dto": "mapstruct",
+    "service": "no",
+    "entityTableName": "author",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

@@ -70,6 +70,7 @@ public class CacheConfiguration {
             cm.createCache(io.github.jhipster.application.domain.Promotion.class.getName(), jcacheConfiguration);
             cm.createCache(io.github.jhipster.application.domain.Promotion.class.getName() + ".etudiants", jcacheConfiguration);
             cm.createCache(io.github.jhipster.application.domain.Taxe.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.jhipster.application.domain.Author.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -12,6 +12,7 @@ import { JhipsterSampleApplicationNg2SassPartenariatModule } from './partenariat
 import { JhipsterSampleApplicationNg2SassFiliereModule } from './filiere/filiere.module';
 import { JhipsterSampleApplicationNg2SassPromotionModule } from './promotion/promotion.module';
 import { JhipsterSampleApplicationNg2SassTaxeModule } from './taxe/taxe.module';
+import { JhipsterSampleApplicationNg2SassAuthorModule } from './author/author.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -28,6 +29,7 @@ import { JhipsterSampleApplicationNg2SassTaxeModule } from './taxe/taxe.module';
         JhipsterSampleApplicationNg2SassFiliereModule,
         JhipsterSampleApplicationNg2SassPromotionModule,
         JhipsterSampleApplicationNg2SassTaxeModule,
+        JhipsterSampleApplicationNg2SassAuthorModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
