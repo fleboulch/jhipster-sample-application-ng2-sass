@@ -1,0 +1,71 @@
+
+<div *ngIf="professionnel">
+    <h2><span>Professionnel</span> {{professionnel.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Nom</span></dt>
+        <dd>
+            <span>{{professionnel.nom}}</span>
+        </dd>
+        <dt><span>Prenom</span></dt>
+        <dd>
+            <span>{{professionnel.prenom}}</span>
+        </dd>
+        <dt><span>Telephone</span></dt>
+        <dd>
+            <span>{{professionnel.telephone}}</span>
+        </dd>
+        <dt><span>Mail</span></dt>
+        <dd>
+            <span>{{professionnel.mail}}</span>
+        </dd>
+        <dt><span>Fonction</span></dt>
+        <dd>
+            <span>{{professionnel.fonction}}</span>
+        </dd>
+        <dt><span>Ancien Etudiant</span></dt>
+        <dd>
+            <span>{{professionnel.ancienEtudiant}}</span>
+        </dd>
+        <dt><span>Date Creation</span></dt>
+        <dd>
+            <span>{{professionnel.dateCreation}}</span>
+        </dd>
+        <dt><span>Date Modification</span></dt>
+        <dd>
+            <span>{{professionnel.dateModification}}</span>
+        </dd>
+        <dt><span>Entreprise Contact</span></dt>
+        <dd>
+            <div *ngIf="professionnel.entrepriseContactId">
+                <a [routerLink]="['/entreprise', professionnel.entrepriseContactId]">{{professionnel.entrepriseContactId}}</a>
+            </div>
+        </dd>
+        <dt><span>Diplome</span></dt>
+        <dd>
+            <span *ngFor="let diplome of professionnel.diplomes; let last = last">
+                <a [routerLink]="['/diplome', diplome?.id ]">{{diplome.nom}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span>Entreprise Personnel</span></dt>
+        <dd>
+            <div *ngIf="professionnel.entreprisePersonnelId">
+                <a [routerLink]="['/entreprise', professionnel.entreprisePersonnelId]">{{professionnel.entreprisePersonnelNom}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'professionnel/'+ professionnel.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

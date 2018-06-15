@@ -1,0 +1,48 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "filiere",
+            "otherEntityName": "filiere",
+            "otherEntityRelationshipName": "diplome"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "partenariat",
+            "otherEntityName": "partenariat",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "diplome"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "intervenant",
+            "otherEntityName": "professionnel",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "diplome"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20171128210438",
+    "entityTableName": "diplome",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

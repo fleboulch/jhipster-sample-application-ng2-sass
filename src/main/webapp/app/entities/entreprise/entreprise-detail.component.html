@@ -1,0 +1,55 @@
+
+<div *ngIf="entreprise">
+    <h2><span>Entreprise</span> {{entreprise.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Nom</span></dt>
+        <dd>
+            <span>{{entreprise.nom}}</span>
+        </dd>
+        <dt><span>Pays</span></dt>
+        <dd>
+            <span>{{entreprise.pays}}</span>
+        </dd>
+        <dt><span>Num Siret</span></dt>
+        <dd>
+            <span>{{entreprise.numSiret}}</span>
+        </dd>
+        <dt><span>Num Siren</span></dt>
+        <dd>
+            <span>{{entreprise.numSiren}}</span>
+        </dd>
+        <dt><span>Telephone</span></dt>
+        <dd>
+            <span>{{entreprise.telephone}}</span>
+        </dd>
+        <dt><span>Date Creation</span></dt>
+        <dd>
+            <span>{{entreprise.dateCreation}}</span>
+        </dd>
+        <dt><span>Date Modification</span></dt>
+        <dd>
+            <span>{{entreprise.dateModification}}</span>
+        </dd>
+        <dt><span>Groupe</span></dt>
+        <dd>
+            <div *ngIf="entreprise.groupeId">
+                <a [routerLink]="['/groupe', entreprise.groupeId]">{{entreprise.groupeNom}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'entreprise/'+ entreprise.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

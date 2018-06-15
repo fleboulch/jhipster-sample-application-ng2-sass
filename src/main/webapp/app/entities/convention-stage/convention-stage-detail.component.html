@@ -1,0 +1,65 @@
+
+<div *ngIf="conventionStage">
+    <h2><span>Convention Stage</span> {{conventionStage.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Sujet</span></dt>
+        <dd>
+            <span>{{conventionStage.sujet}}</span>
+        </dd>
+        <dt><span>Fonctions</span></dt>
+        <dd>
+            <span>{{conventionStage.fonctions}}</span>
+        </dd>
+        <dt><span>Competences</span></dt>
+        <dd>
+            <span>{{conventionStage.competences}}</span>
+        </dd>
+        <dt><span>Date Debut</span></dt>
+        <dd>
+            <span>{{conventionStage.dateDebut | date:'medium'}}</span>
+        </dd>
+        <dt><span>Date Fin</span></dt>
+        <dd>
+            <span>{{conventionStage.dateFin | date:'medium'}}</span>
+        </dd>
+        <dt><span>Etudiant</span></dt>
+        <dd>
+            <div *ngIf="conventionStage.etudiantId">
+                <a [routerLink]="['/etudiant', conventionStage.etudiantId]">{{conventionStage.etudiantNom}}</a>
+            </div>
+        </dd>
+        <dt><span>Lieu Stage</span></dt>
+        <dd>
+            <div *ngIf="conventionStage.lieuStageId">
+                <a [routerLink]="['/site', conventionStage.lieuStageId]">{{conventionStage.lieuStageAdresse}}</a>
+            </div>
+        </dd>
+        <dt><span>Tuteur</span></dt>
+        <dd>
+            <div *ngIf="conventionStage.tuteurId">
+                <a [routerLink]="['/tuteur', conventionStage.tuteurId]">{{conventionStage.tuteurNom}}</a>
+            </div>
+        </dd>
+        <dt><span>Maitre Stage</span></dt>
+        <dd>
+            <div *ngIf="conventionStage.maitreStageId">
+                <a [routerLink]="['/professionnel', conventionStage.maitreStageId]">{{conventionStage.maitreStageNom}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'convention-stage/'+ conventionStage.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,64 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myEtudiantLabel">Create or edit a Etudiant</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!etudiant.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="etudiant.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                [(ngModel)]="etudiant.nom"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_prenom">Prenom</label>
+            <input type="text" class="form-control" name="prenom" id="field_prenom"
+                [(ngModel)]="etudiant.prenom"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mail">Mail</label>
+            <input type="text" class="form-control" name="mail" id="field_mail"
+                [(ngModel)]="etudiant.mail"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_sexe">Sexe</label>
+            <select class="form-control" name="sexe" [(ngModel)]="etudiant.sexe" id="field_sexe" >
+                <option value="HOMME">HOMME</option>
+                <option value="FEMME">FEMME</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_numEtudiant">Num Etudiant</label>
+            <input type="text" class="form-control" name="numEtudiant" id="field_numEtudiant"
+                [(ngModel)]="etudiant.numEtudiant" required />
+            <div [hidden]="!(editForm.controls.numEtudiant?.dirty && editForm.controls.numEtudiant?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.numEtudiant?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_promotion">Promotion</label>
+            <select class="form-control" id="field_promotion" multiple name="promotion" [(ngModel)]="etudiant.promotions">
+                <option [ngValue]="getSelected(etudiant.promotions, promotionOption)" *ngFor="let promotionOption of promotions; trackBy: trackPromotionById">{{promotionOption.annee}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,41 @@
+
+<div *ngIf="partenariat">
+    <h2><span>Partenariat</span> {{partenariat.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Date Debut</span></dt>
+        <dd>
+            <span>{{partenariat.dateDebut | date:'medium'}}</span>
+        </dd>
+        <dt><span>Date Fin</span></dt>
+        <dd>
+            <span>{{partenariat.dateFin | date:'medium'}}</span>
+        </dd>
+        <dt><span>Diplome</span></dt>
+        <dd>
+            <span *ngFor="let diplome of partenariat.diplomes; let last = last">
+                <a [routerLink]="['/diplome', diplome?.id ]">{{diplome.nom}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span>Entreprise</span></dt>
+        <dd>
+            <div *ngIf="partenariat.entrepriseId">
+                <a [routerLink]="['/entreprise', partenariat.entrepriseId]">{{partenariat.entrepriseNom}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'partenariat/'+ partenariat.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

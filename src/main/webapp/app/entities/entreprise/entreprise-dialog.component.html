@@ -1,0 +1,79 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myEntrepriseLabel">Create or edit a Entreprise</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!entreprise.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="entreprise.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                [(ngModel)]="entreprise.nom"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_pays">Pays</label>
+            <input type="text" class="form-control" name="pays" id="field_pays"
+                [(ngModel)]="entreprise.pays"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_numSiret">Num Siret</label>
+            <input type="text" class="form-control" name="numSiret" id="field_numSiret"
+                [(ngModel)]="entreprise.numSiret" required />
+            <div [hidden]="!(editForm.controls.numSiret?.dirty && editForm.controls.numSiret?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.numSiret?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_numSiren">Num Siren</label>
+            <input type="text" class="form-control" name="numSiren" id="field_numSiren"
+                [(ngModel)]="entreprise.numSiren" required />
+            <div [hidden]="!(editForm.controls.numSiren?.dirty && editForm.controls.numSiren?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.numSiren?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_telephone">Telephone</label>
+            <input type="text" class="form-control" name="telephone" id="field_telephone"
+                [(ngModel)]="entreprise.telephone"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dateCreation">Date Creation</label>
+            <input type="number" class="form-control" name="dateCreation" id="field_dateCreation"
+                [(ngModel)]="entreprise.dateCreation"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dateModification">Date Modification</label>
+            <input type="number" class="form-control" name="dateModification" id="field_dateModification"
+                [(ngModel)]="entreprise.dateModification"  />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_groupe">Groupe</label>
+            <select class="form-control" id="field_groupe" name="groupe" [(ngModel)]="entreprise.groupeId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="groupeOption.id" *ngFor="let groupeOption of groupes; trackBy: trackGroupeById">{{groupeOption.nom}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

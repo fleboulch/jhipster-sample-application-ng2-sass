@@ -1,0 +1,82 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myConventionStageLabel">Create or edit a Convention Stage</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!conventionStage.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="conventionStage.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_sujet">Sujet</label>
+            <input type="text" class="form-control" name="sujet" id="field_sujet"
+                [(ngModel)]="conventionStage.sujet"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_fonctions">Fonctions</label>
+            <input type="text" class="form-control" name="fonctions" id="field_fonctions"
+                [(ngModel)]="conventionStage.fonctions"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_competences">Competences</label>
+            <input type="text" class="form-control" name="competences" id="field_competences"
+                [(ngModel)]="conventionStage.competences"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dateDebut">Date Debut</label>
+            <div class="d-flex">
+                <input id="field_dateDebut" type="datetime-local" class="form-control" name="dateDebut" [(ngModel)]="conventionStage.dateDebut"
+                  />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dateFin">Date Fin</label>
+            <div class="d-flex">
+                <input id="field_dateFin" type="datetime-local" class="form-control" name="dateFin" [(ngModel)]="conventionStage.dateFin"
+                  />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_etudiant">Etudiant</label>
+            <select class="form-control" id="field_etudiant" name="etudiant" [(ngModel)]="conventionStage.etudiantId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="etudiantOption.id" *ngFor="let etudiantOption of etudiants; trackBy: trackEtudiantById">{{etudiantOption.nom}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_lieuStage">Lieu Stage</label>
+            <select class="form-control" id="field_lieuStage" name="lieuStage" [(ngModel)]="conventionStage.lieuStageId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="siteOption.id" *ngFor="let siteOption of sites; trackBy: trackSiteById">{{siteOption.adresse}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_tuteur">Tuteur</label>
+            <select class="form-control" id="field_tuteur" name="tuteur" [(ngModel)]="conventionStage.tuteurId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="tuteurOption.id" *ngFor="let tuteurOption of tuteurs; trackBy: trackTuteurById">{{tuteurOption.nom}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_maitreStage">Maitre Stage</label>
+            <select class="form-control" id="field_maitreStage" name="maitreStage" [(ngModel)]="conventionStage.maitreStageId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="professionnelOption.id" *ngFor="let professionnelOption of professionnels; trackBy: trackProfessionnelById">{{professionnelOption.nom}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
